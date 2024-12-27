@@ -8,9 +8,7 @@ class ApiFilter
 {
     protected $safeParams = [];
 
-    protected $columnMap = [
-        'postalCode' => 'postal_code'
-    ];
+    protected $columnMap = [];
 
     protected $operatorMap = [];
 
