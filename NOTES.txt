@@ -1,0 +1,114 @@
+Composer Installation Directories
+---------------------------------
+C:\ProgramData\ComposerSetup
+C:/Users/ASUS/AppData/Roaming/Composer
+
+composer global require laravel/installer
+- it will create a php.ini file in our php directory
+- need to uncomment in php.ini file 
+	extension=fileinfo -> for installing dependencies
+	extension=pdo_mysql -> to enable mysql driver
+
+
+Create Project
+--------------
+laravel new <project-name>
+composer install
+
+
+PS E:\PHP\demo-api> php artisan make:model Customer --all
+
+   INFO  Model [E:\PHP\demo-api\app\Models\Customer.php] created successfully.
+   INFO  Factory [E:\PHP\demo-api\database\factories\CustomerFactory.php] created successfully.
+   INFO  Migration [E:\PHP\demo-api\database\migrations/2024_12_25_085537_create_customers_table.php] created successfully.
+   INFO  Seeder [E:\PHP\demo-api\database\seeders\CustomerSeeder.php] created successfully.
+   INFO  Request [E:\PHP\demo-api\app\Http\Requests\StoreCustomerRequest.php] created successfully.
+   INFO  Request [E:\PHP\demo-api\app\Http\Requests\UpdateCustomerRequest.php] created successfully.
+   INFO  Controller [E:\PHP\demo-api\app\Http\Controllers\CustomerController.php] created successfully.
+   INFO  Policy [E:\PHP\demo-api\app\Policies\CustomerPolicy.php] created successfully.
+
+PS E:\PHP\demo-api> php artisan migrate:fresh --seed
+
+   INFO  Preparing database.
+
+  Creating migration table .............................................................................. 32.21ms DONE
+
+   INFO  Running migrations.
+
+  0001_01_01_000000_create_users_table .................................................................. 89.31ms DONE
+  0001_01_01_000001_create_cache_table .................................................................. 27.63ms DONE
+  0001_01_01_000002_create_jobs_table ................................................................... 89.20ms DONE
+  2024_12_25_085537_create_customers_table .............................................................. 15.20ms DONE
+  2024_12_25_090449_create_invoices_table ............................................................... 15.93ms DONE
+
+
+   INFO  Seeding database.
+
+  Database\Seeders\CustomerSeeder ............................................................................ RUNNING
+  Database\Seeders\CustomerSeeder ...................................................................... 2,587 ms DONE
+
+PS E:\PHP\demo-api> php artisan install:api   ------> to enable api.php for rest apis (using laravel/sanctum)
+	
+	./composer.json has been updated
+	Running composer update laravel/sanctum
+	Loading composer repositories with package information
+	Updating dependencies
+	Lock file operations: 1 install, 0 updates, 0 removals
+  		- Locking laravel/sanctum (v4.0.7)
+
+   INFO  Discovering packages.
+
+  laravel/pail .................................................................................................. DONE
+  laravel/sail .................................................................................................. DONE
+  laravel/sanctum ............................................................................................... DONE
+  laravel/tinker ................................................................................................ DONE
+  nesbot/carbon ................................................................................................. DONE
+  nunomaduro/collision .......................................................................................... DONE
+  nunomaduro/termwind ........................................................................................... DONE
+
+	81 packages you are using are looking for funding.
+	Use the `composer fund` command to find out more!
+	> @php artisan vendor:publish --tag=laravel-assets --ansi --force
+
+   INFO  No publishable resources for tag [laravel-assets].
+
+	No security vulnerability advisories found.
+   INFO  Published API routes file.
+
+PS E:\PHP\demo-api> php artisan make:resource V1\CustomerResource        --------> Resource classes help manipulate JSON responses
+
+   INFO  Resource [E:\PHP\demo-api\app\Http\Resources\V1\CustomerResource.php] created successfully.
+
+PS E:\PHP\demo-api> php artisan make:resource V1\CustomerCollection	----------> It is also a resource, but used to work with collections of data
+
+   INFO  Resource collection [E:\PHP\demo-api\app\Http\Resources\V1\CustomerCollection.php] created successfully.
+
+PS E:\php\demo-api> composer require Laravel/sanctum
+PS E:\php\demo-api> php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"   --------------> publish sanctum for token based authentication
+PS E:\php\demo-api> php artisan migrate  ------> create personal_access_tokens tabl
+
+   INFO  Publishing assets.
+
+  Copying directory [E:\PHP\demo-api\vendor\laravel\sanctum\database\migrations] to [E:\PHP\demo-api\database\migrations]  DONE
+  File [E:\PHP\demo-api\config\sanctum.php] already exists ................................................... SKIPPED
+
+PS E:\php\demo-api> php artisan key:generate  ----> to generate APP_KEY in .env
+
+   INFO  Application key set successfully.
+
+localhost:8000/setup
+{
+"admin": "1|BCI65b7KAjeqfxBIOPjSKUvUWDo9hsXhOFeC4ibd62f8044a",
+"update": "2|1gvRwktI4TM6xcqRE3GeUbpCULmDrjxXpzU2HbUR69ab75c9",
+"basic": "3|tLMwexacS83qQdGOjf3LuCFvopKAAs1agZLQ77jw4adce4cf"
+}
+
+
+PS C:\Users\ASUS> php artisan serve --port=8000  ----------> run laravel app
+
+
+PHP Notes
+---------
+-> is the object operator, to access object elements
+:: allows access to a constant, static property, or static method of a class or one of its parents
+If a file contains only PHP code, it is preferable to omit the PHP closing tag at the end of the file
